@@ -6,6 +6,8 @@ orbs:
   serverless-framework: circleci/serverless-framework@2.0.1
 
 jobs:
+  node/test:
+    version: 18.15.0
   deploy:
     executor: serverless-framework/default
     steps:
@@ -19,8 +21,7 @@ jobs:
 workflows:
   test_and_deploy:
     jobs:
-      - node/test:
-          version: 18.15.0
+      - node/test
       - deploy:
           requires:
             - node/test
