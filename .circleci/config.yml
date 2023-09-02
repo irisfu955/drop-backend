@@ -20,7 +20,7 @@ workflows:
   test_and_deploy:
     jobs:
       - node/test:
-          version: 16.14.2
+          version: 18.15.0
       - deploy:
           requires:
             - node/test
