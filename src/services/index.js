@@ -1,0 +1,1 @@
+module.exports.gptService = require('./gpt.service');
