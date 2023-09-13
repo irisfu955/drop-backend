@@ -1,4 +1,4 @@
 node_modules
 .serverless
 .env
-src/config/firebaseServices.json
+src/config/firebaseService.json
