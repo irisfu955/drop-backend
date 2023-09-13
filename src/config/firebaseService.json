@@ -1,0 +1,14 @@
+{
+    "type": "service_account",
+    "project_id": "dropboxsign",
+    "private_key_id": "a219ffa4ef05b606a43431e4860a040cb960b2f2",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCNclUQC1eOmJ7g\nLgQ7prGTP5EBqI2vA2wX8zqpiL2ZpHRU0WIC2+AEkltkPwkH26zvpYPfpYNlYuGV\niEKSl9LqIS293rAx+JmepJA1r8jN5u3ON9rIcx5Sn81EohLYujLQJdwQymx9JSA1\nt5CRLdXm1qMHXF8DseyErjk5+wdUpCua3rqP2/Cle0fJ3zjaHSf9G8mT8makX15d\n116/wJeX3rbLIMBoEiRzjLBRzhaCAvGigxbo4yyQgYl+550uHknQo7it4ASQXlqE\nsd8SaVVtSa4rI/ZB1sLNaVQwf1CSihTLMXi9cwcm+xmt6z1TKsD0cBhF9mARkyML\nyAlmvGu7AgMBAAECggEAAKxCBy6C8Fm4v8PObh43RjKXI8ZXa78GzmJchjvxS5O9\ntBY1EE8v7T98r1o+9A9PFk0S4v1nbSepf4bXHBTNliLHWQExWYpG1R3U/S2fvyfv\nFJmtbBMoHzu7iPH5DSIe2+p6zobfYRi4gG3XM66G/DQQbCwoPqIGSD/rAVBMemXn\nG+rVnzPxG/5wrsatyO1POIgkAp9cQLO0GytHRZ3GFqOtim8SJ19TCaxd7chA2Wy/\nFTEaJWpAFZI0uYCfbXRz+Fsw7E/M7/9qgBMiG6NScPrCcgJj0wazPeHHc5zjkhmz\n/04/9dTpY9jqSb7fjenzh3pA3vNZ2QavXaNKORVeWQKBgQDGd+q1hzcnp1oUP8Zg\n4B/mdKLoiCyuenMRUPzvNCkqiOH+uq2nmxjUdmZJ07iifdEf9QC7/102y+h0zIQi\nIYD7sNjEFIBSaP+c5UvM05RofmXh9tu+LxG9zD7czYAtw+KAPBLR8OZdfJQj0fVH\ncZ2dxkFbpBvhGCiCY4neIAVG1QKBgQC2cuag47xXWhYIyjn8XcXNwlk7P3OFNAB7\nM2IAJh0x+kWmmkZGGoZFgXXOpv2ASBxuoCgBznrP9BxoHz/Jr8y1HD/kxkHN/CEA\nHAEtFo9BMqANxI42yMECgV6uVSMNJqsp3pDCJRU6kfXJi2v0mmS6a3CVHTfj6kMU\n3WSfkZVQTwKBgQDGBGddbueM3OB3S5o2lee+G6lesF9ERlAAevmiAD0Cf0hcywzw\nKUMA2JD+IAwbs8SvSdfNut/aCGCKCHPdSehTNwNPv9S4ZKKEfBLA7mkoSNSGO7LL\nclMVN2+RBkhZYRPgNg/g/6YYqG91vcon2igUfvY+5OIcF+pzDbVEtlYNcQKBgGrp\nwgQd78wwWiEkf/5G5RbCAJAbipJP+sg3QAJeU1VqF06dsPh7qpsoVeSXLo3xs9eP\numH0oTsjDVJmnXaOsiKfP0HMe9s9GAl8X6QQSDoodGoc+ElaMuBI9zapZTTbqAmN\nBr7+BAaiaamFLenUX5puQzbePFYufMjJQ6HOKfU5AoGAVqtChZQ6RpN/4xk92dC2\nKfMK+AQS2WAWPg1q2oz3cRcQ61/pKjKmS72DoWQQ3nQERl0piG1+GsgdoH2SLIQ8\n8ckPEsMoW2R3S2wR7FgzCkyCass9CZpub2fP1yWnsDAXtIXzIf4Bfr20q8DL9Tlu\nCUS7Jk9VZkR7eZSnAzK03as=\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-t5hx1@dropboxsign.iam.gserviceaccount.com",
+    "client_id": "114835755689538716218",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-t5hx1%40dropboxsign.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+  }
+  
