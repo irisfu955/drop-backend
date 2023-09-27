@@ -4,11 +4,12 @@ service: drop-backend
 frameworkVersion: '3'
 
 custom:
-  tableName: 'users-table-${sls:stage}'
+  clientsTableName: 'clients-table-${sls:stage}'
 
 provider:
   name: aws
   runtime: nodejs18.x
+  region: us-east-1
   iam:
     role:
       statements:
@@ -21,29 +22,44 @@ provider:
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
           Resource:
-            - Fn::GetAtt: [ UsersTable, Arn ]
+            - Fn::GetAtt: [ ClientsTable, Arn ]
   environment:
-    USERS_TABLE: ${self:custom.tableName}
+    DYNAMODB_TABLE_NAME: ${self:custom.clientsTableName}
 
 functions:
-  api:
-    handler: index.handler
+  createClient:
+    handler: src/handler/client.createClient
     events:
-      - httpApi: '*'
-  explanationApi:
-    handler: explanation.handler
+      - httpApi:
+          method: POST
+          path: /client
+
+  createDocument:
+    handler: src/handler/document.createDocument
     events:
-      - httpApi: '*'
+      - httpApi:
+          method: POST
+          path: /document
+
+  getAllDocuments:
+    handler: src/handler/document.getAllDocuments
+    events:
+      - httpApi:
+          method: GET
+          path: /document
 resources:
   Resources:
-    UsersTable:
+    ClientsTable:
       Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
       Properties:
         AttributeDefinitions:
-          - AttributeName: userId
+          - AttributeName: clientId
             AttributeType: S
         KeySchema:
-          - AttributeName: userId
+          - AttributeName: clientId
             KeyType: HASH
-        BillingMode: PAY_PER_REQUEST
-        TableName: ${self:custom.tableName}
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: 'clientsTable'
