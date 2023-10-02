@@ -14,7 +14,8 @@
     "firebase-admin": "^11.10.1",
     "http-status": "^1.7.0",
     "openai": "^4.5.0",
-    "serverless-http": "^3.1.1"
+    "serverless-http": "^3.1.1",
+    "uuid": "^9.0.1"
   },
   "scripts": {
     "test": "node --version"

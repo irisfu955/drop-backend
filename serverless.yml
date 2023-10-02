@@ -21,10 +21,10 @@ provider:
             - dynamodb:PutItem
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
-          Resource:
-            - Fn::GetAtt: [ ClientsTable, Arn ]
+          Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/*"
+            
   environment:
-    DYNAMODB_TABLE_NAME: ${self:custom.clientsTableName}
+    DYNAMODB_NAMESPACE: ${opt:stage, "dev"}
 
 functions:
   createClient:
@@ -46,13 +46,29 @@ functions:
     events:
       - httpApi:
           method: GET
-          path: /document
+          path: /documents/{clientId}
+
+  createExplanation:
+    handler: src/handler/explanation.createExplanation
+    events:
+      - httpApi:
+          method: POST
+          path: /explanation
+
+  getAllExplanations:
+    handler: src/handler/explanation.getAllExplanations
+    events:
+      - httpApi:
+          method: GET
+          path: /explanations/{documentId}
+
 resources:
   Resources:
     ClientsTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
+        TableName: 'clientsTable'
         AttributeDefinitions:
           - AttributeName: clientId
             AttributeType: S
@@ -62,4 +78,67 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: 'clientsTable'
+    
+    DocumentTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: documentId
+            AttributeType: S
+          -
+            AttributeName: clientId
+            AttributeType: S  
+        KeySchema:
+          -
+            AttributeName: documentId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: 'documentsTable'
+        GlobalSecondaryIndexes:
+          -
+            IndexName: client
+            KeySchema:
+              -
+                AttributeName: clientId
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1
+
+    ExplanationTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+          -
+            AttributeName: documentId
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: 'explanationsTable'
+        GlobalSecondaryIndexes:
+          -
+            IndexName: document
+            KeySchema:
+              -
+                AttributeName: documentId
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1   

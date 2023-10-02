@@ -4,37 +4,39 @@ const { DynamoDBClient } =require("@aws-sdk/client-dynamodb");
 const client = new DynamoDBClient({});
 const ddbDocClient = DynamoDBDocumentClient.from(client);
 /* 
-document: {
-    documentId: string,
-    documentName: string,
-    data: string,
-    clientId: string
+explanation: {
+    id: string,
+    originText: string,
+    gptExplanation: string,
+    documentId: string
 }
 */
 const { v4: uuidv4 } = require('uuid');
-const createDocument = async (event) => {
+
+const createExplanation = async (event) => {
     const response = {statusCode: 200 };
     try {
         const body = JSON.parse(event.body);
         const params = {
-            TableName: "documentsTable",
+            TableName: "explanationsTable",
             Item: {
-                documentId: uuidv4(),
-                documentName: body.documentName,
-                data: body.data,
-                clientId: body.clientId
+                id: uuidv4(),
+                originText: body.originText,
+                gptExplanation: body.gptExplanation,
+                documentId: body.documentId
+                
             },
         };
         const createResult = await ddbDocClient.send(new PutCommand(params));
         response.body = JSON.stringify({
-            message: "successfully created document.",
+            message: "successfully created explanation.",
             createResult,
         });
     } catch (err) {
         console.error(err);
         response.statusCode = 500;
         response.body = JSON.stringify({
-            message: "Failed to create document",
+            message: "Failed to create explanation",
             errorMsg: err.message,
             errorStack: err.stack,
 
@@ -43,29 +45,29 @@ const createDocument = async (event) => {
     return response;
 };
 
-const getAllDocuments = async (event) => {
+const getAllExplanations = async (event) => {
     const response = { statusCode: 200 };
 
     try {
         const params = {
-            TableName: "documentsTable",
-            IndexName: "client",
-            FilterExpression: "clientId = :clientId",
+            TableName: "explanationsTable",
+            IndexName: "document",
+            FilterExpression: "documentId = :documentId",
             ExpressionAttributeValues: {
-                ":clientId":  event.pathParameters.clientId,
+                ":documentId":  event.pathParameters.documentId,
             },
         };
         const { Items } = await ddbDocClient.send(new ScanCommand(params));
 
         response.body = JSON.stringify({
-            message: "Successfully retrieved all documents.",
+            message: "Successfully retrieved all explanations.",
             data: Items,
         });
     } catch (e) {
         console.error(e);
         response.statusCode = 500;
         response.body = JSON.stringify({
-            message: "Failed to retrieve documents.",
+            message: "Failed to retrieve explanations.",
             errorMsg: e.message,
             errorStack: e.stack,
         });
@@ -77,6 +79,6 @@ const getAllDocuments = async (event) => {
 
 
 module.exports = {
-    createDocument,
-    getAllDocuments,
+    createExplanation,
+    getAllExplanations,
 };
